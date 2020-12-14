@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>【终结】一份傅里叶笔记 - SpiritedAwayCN&#039;s Homepage</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="SpiritedAwayCN&#039;s Homepage"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="SpiritedAwayCN&#039;s Homepage"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="注：本文作者为@IcyChlorine，由于目前IcyChlorine尚未建立起个人网站，因此将内容暂时挂载到我的博客中。本文依旧使用CC BY-NC-SA 4.0协议，但署名时请署名为IcyChlorine。  IcyChlorine 2020-12-14 写在前面自从大一学了傅里叶级数（并且没学好），大二的数理方法又错过了讲傅里叶变换的那节课（数理方法），就一直对傅里叶变换感觉懵懵懂懂，没学"><meta property="og:type" content="blog"><meta property="og:title" content="【终结】一份傅里叶笔记"><meta property="og:url" content="http://spiritedawaycn.github.io/2020/12/14/Notes-of-Fourier-Transform/"><meta property="og:site_name" content="SpiritedAwayCN&#039;s Homepage"><meta property="og:description" content="注：本文作者为@IcyChlorine，由于目前IcyChlorine尚未建立起个人网站，因此将内容暂时挂载到我的博客中。本文依旧使用CC BY-NC-SA 4.0协议，但署名时请署名为IcyChlorine。  IcyChlorine 2020-12-14 写在前面自从大一学了傅里叶级数（并且没学好），大二的数理方法又错过了讲傅里叶变换的那节课（数理方法），就一直对傅里叶变换感觉懵懵懂懂，没学"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://spiritedawaycn.github.io/img/og_image.png"><meta property="article:published_time" content="2020-12-14T11:43:59.000Z"><meta property="article:modified_time" content="2020-12-14T12:12:13.593Z"><meta property="article:author" content="SpiritedAwayCN"><meta property="article:tag" content="数理基础"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://spiritedawaycn.github.io/2020/12/14/Notes-of-Fourier-Transform/"},"headline":"SpiritedAwayCN's Homepage","image":["http://spiritedawaycn.github.io/img/og_image.png"],"datePublished":"2020-12-14T11:43:59.000Z","dateModified":"2020-12-14T12:12:13.593Z","author":{"@type":"Person","name":"SpiritedAwayCN"},"description":"注：本文作者为@IcyChlorine，由于目前IcyChlorine尚未建立起个人网站，因此将内容暂时挂载到我的博客中。本文依旧使用CC BY-NC-SA 4.0协议，但署名时请署名为IcyChlorine。  IcyChlorine 2020-12-14 写在前面自从大一学了傅里叶级数（并且没学好），大二的数理方法又错过了讲傅里叶变换的那节课（数理方法），就一直对傅里叶变换感觉懵懵懂懂，没学"}</script><link rel="canonical" href="http://spiritedawaycn.github.io/2020/12/14/Notes-of-Fourier-Transform/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="SpiritedAwayCN&#039;s Homepage" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/2020/11/17/About-me">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-12-14T11:43:59.000Z" title="2020-12-14T11:43:59.000Z">2020-12-14</time>发表</span><span class="level-item"><time dateTime="2020-12-14T12:12:13.593Z" title="2020-12-14T12:12:13.593Z">2020-12-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Ideas/">Ideas</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">【终结】一份傅里叶笔记</h1><div class="content"><blockquote>
+<p><strong>注：</strong>本文作者为<a target="_blank" rel="noopener" href="https://github.com/IcyChlorine">@IcyChlorine</a>，由于目前IcyChlorine尚未建立起个人网站，因此将内容<strong>暂时</strong>挂载到我的博客中。本文依旧使用CC BY-NC-SA 4.0协议，但署名时请署名为IcyChlorine。</p>
+</blockquote>
+<p>IcyChlorine 2020-12-14</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>自从大一学了傅里叶级数（并且没学好），大二的数理方法又错过了讲傅里叶变换的那节课（数理方法），就一直对傅里叶变换感觉懵懵懂懂，没学进去；虽然道理能搞懂、公式能照搬，但用起来总是没有信心；再加之傅里叶变换的具体方法和公式种类繁多，有时更让我摸不着头脑。由于计算物理要讲FFT,便打算趁这个机会查缺补漏，把傅里叶变换没有搞懂的地方彻底搞懂（指我自己的问题），整理成笔记。</p>
+<a id="more"></a>
+
+<p>这份笔记的内容应该包括：</p>
+<ul>
+<li><p>从傅里叶级数到傅里叶变换的”推导“（是如何过渡过去的？）</p>
+<ul>
+<li>这里便会牵涉到各种不同的傅里叶公式</li>
+</ul>
+</li>
+<li><p>关于傅里叶级数敛散性的一些讨论（刘旭峰留下的坑，看了伍胜健的数分II中的相关内容才明白）</p>
+</li>
+<li><p>卷积的推导</p>
+</li>
+</ul>
+<h2 id="从傅里叶级数到傅里叶变换"><a href="#从傅里叶级数到傅里叶变换" class="headerlink" title="从傅里叶级数到傅里叶变换"></a>从傅里叶级数到傅里叶变换</h2><p>在高数课本中，给出的傅里叶级数公式为：<br>$$f(x)=\frac{a_0}{2}+\sum_{n=1}^\infty (a_n\cos nx+b_n \sin n_x)$$</p>
+<p>​    <em>简单起见，我们假设函数没有瑕点，级数总能收敛</em></p>
+<p>其中系数由积分给出：</p>
+<p>$$a_n=\frac{1}{\pi}\int_\pi^\pi f(x)\cos nx \mathrm{d}x$$</p>
+<p>$$b_n=\frac{1}{\pi}\int_\pi^\pi f(x)\sin nx \mathrm{d}x$$</p>
+<p>这是来自于三角函数系的正交性:</p>
+<p>$$\langle \cos mx|\cos nx\rangle=\pi\delta_{mn},\langle \sin mx|\sin nx\rangle=\pi\delta_{mn}$$</p>
+<p>$$\langle \cos mx|\sin nx\rangle=0$$</p>
+<p>这个结果看上去非常美丽，但却仍有一些问题：</p>
+<ul>
+<li>为什么$n=0$的项要搞特殊？强迫症很痛苦啊！<ul>
+<li>进一步来说，从数学上，为什么$n=0$的项很特殊呢？(显然我并不满足那个简单的定积分公式)</li>
+<li>所有三角函数看上去还是有点冗余/复杂.</li>
+</ul>
+</li>
+<li>这个形式要求$f(x)$必须是以$2\pi$为周期的函数，对一般函数不太好处理</li>
+<li>这个形式很不容易推广/过渡到傅里叶变换上.</li>
+</ul>
+<p>所幸我这两天发现了一个惊天秘密,可以解决这些问题.</p>
+<p>简单起见,我们首先来看余弦项,把正弦项扔掉(或者说假定函数是偶函数):</p>
+<p>$$ f(x)=\sum_{n=-\infty}^{-1}\frac{a_n}{2}\cos nx+\frac{a_0}{2}+\sum_{n=1}^{\infty}\frac{a_n}{2}\cos nx=\sum_{n=-\infty}^\infty \frac{a_n}{2}\cos nx$$</p>
+<p>瞬间就统一了啊有木有!看看那个该死的$a_0$为什么要搞特殊…一下子就看清楚了.</p>
+<p>但是问题还没有结束…这种trick对正弦项来说并没有什么卵用;事实上,它是不可推广的.事实^2上——上式更好的用法是当作一个不严谨的insight,作为一个入口.我们一会儿会回来再看一个式子.</p>
+<p>更好的做法是,先向复数推广,我们考虑下列复数的傅里叶级数:</p>
+<p>$$\sum_{n=-\infty}^{\infty}e_ne^{inx}$$</p>
+<p>函数系$(e^{inx})_{n=-\infty}^{+\infty}$的正交性比三角函数系更有意思,也更令强迫症满意:</p>
+<p>$$\langle e^{imx}|e^{inx}\rangle=\int_{-\pi}^{\pi}e^{imx}e^{inx}\mathrm{d}x=\int_{-\pi}^{\pi}e^{i(m+n)x}\mathrm{d}x\\=\frac{1}{i(m+n)}e^{i(m+n)x}|_{-\pi}^\pi$$</p>
+<p>等等,这怎么好像和我们以前看到的不对?</p>
+<p>啊,让第二个指数项的指数加个负号就对了…这不就是共轭内积的定义吗!大师我悟了!(指内积为什么要定义成共轭内积的样子——不然,以这个粒子为例,指数函数系的正交性就无法得出了)</p>
+<p>改变后的式子为:</p>
+<p>$$\langle e^{imx}|e^{inx}\rangle=\int_{-\pi}^{\pi}e^{imx}e^{-inx}\mathrm{d}x=\int_{-\pi}^{\pi}e^{i(m-n)x}\mathrm{d}x\\=\frac{1}{i(m-n)}e^{i(m-n)x}|_{-\pi}^\pi=\frac{1}{i(m-n)}[e^{i(m-n)\pi}-e^{i(m-n)-\pi}]=\frac{2}{m-n}\sin (m-n)\pi=0$$</p>
+<p>当然,看到分母上的$m-n$后,我立马反应过来,这应该是$m\neq n$时的情况…对于$m=n$的情况,应该是:</p>
+<p>$$\langle e^{inx}|e^{inx}\rangle=\int_{-\pi}^\pi e^{inx}e^{-inx}\mathrm{d} x=\int_{-\pi}^\pi 1\ \mathrm{d}x=2\pi$$</p>
+<p>于是统合起来就得到:$\langle e^{imx}|e^{inx}\rangle=2\pi\delta_{mn} $</p>
+<p>值得注意的是:</p>
+<ul>
+<li>这里的$mn$是任意整数,不需要是正数;这比三角函数系前进了一大步</li>
+<li>这里的模长是$2\pi$而不是三角函数的$\pi$,这是很关键的<ul>
+<li>事实上,这是由于$e^{inx}e^{-imx}=(\cos nx+i\sin nx)(\cos mx-i\sin mx)=\cos nx\cos mx+\sin nx\sin mx$造成的;”共轭”这一关键因素保证了另两项是相消的</li>
+</ul>
+</li>
+</ul>
+<p>于是我们可以写出复数形式的,函数的傅里叶级数:</p>
+<p>$$f(x)=\sum^\infty_{n=-\infty}e_ne^{inx}$$</p>
+<p>其中</p>
+<p>$$e_n=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)(e^{inx})^*\mathrm{d}x=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}\mathrm{d}x=\frac{\langle f(x)|e^{inx}\rangle}{\langle e^{inx}|e^{inx}\rangle}$$</p>
+<p>一般来说,$c_n$可以是复数.</p>
+<p>为了加深对复数形式和三角形式的级数之间的关系的理解,我们再做一讨论.还记得前面那个被展开的三角形式傅里叶级数吗?我们换一种形式向负数展开:</p>
+<p>$$f(x)=\sum_{n=-\infty}^\infty(c_n\cos nx+s_n\sin nx)\\=\sum_{n=-\infty}^\infty(e_n\cos nx+ie_n\sin nx)$$</p>
+<p>于是,我们两边都可以得到系数关系(两种级数展开都具有唯一性,不难发现,于是可以比较系数):<br>$$<br>\begin{cases}<br>c_{-n}+c_n=a_n,c_0=a_0\\<br>-s_{-n}+s_n=b_n<br>\end{cases},\begin{cases}<br>c_n=e_n\\<br>s_n=ie_n<br>\end{cases}<br>$$<br>由右边可以得到$s_n=ic_n$,带入左边的下面一式,就可以得到$c_n$的方程组:<br>$$<br>\begin{cases}<br>c_{n}+c_{-n}=a_n,c_0=a_0\\<br>c_n-c_{-n}=-ib_n<br>\end{cases},s_n=ic_n<br>$$</p>
+<p>由这一式,我们就可以由三角形式的傅里叶级数解出复指数形式的傅里叶级数(的系数),从而建立起了二者之间的联系.</p>
+<p>作为特例,当函数为偶函数时,正弦项$b_n$全为零,有$c_n=c_{-n}$,于是就可以得到之前所说的$c_n=\frac{a_n}{2}$的形式,通过将正数那边的级数翻转一半到负数上,并使得形式统一(没错,指的就是$a_0/2$你这个兔崽子).这时的$s_n=ic_n=ia_n/2$,正数和负数上的部分相互抵消.<em>这里是对前面的那个坑的交代</em></p>
+<p><strong>可以看到,从实到复、指标从正数(或者说自然数)推广到整数的过程是并不trivial的.两种形式下的系数关系略复杂(由线性方程组确定),在偶函数这个特例里有一个比较简单的形式.</strong></p>
+<p><strong>指标从正数推广到整数(后面就会看到,这一步是推广到傅里叶变换的不可或缺的一步),很巧地,随着[从实到复]的推广过程自动完成了.这是我始料未及的.这在一定程度上源自于指数函数系$(e^{inx})_{n=-\infty}^\infty$在整个整数域(而不仅仅是正数)上的正交性.</strong></p>
+<p><strong>另一方面,总体来说复指数形式的一切都比较简单,更具有数学的美和简洁.这表面上源自于指数含数系更好(更统一、更扁平)的正交性,根本上则来源于[一个复数天然地包括了两个实数,能携带比单个实数更多的信息]这一性质本身.指数函数通过欧拉公式统括了正弦和余弦两个函数,并使得最终的公式更为简洁.</strong></p>
+<p>从三角形式到复指数形式,我们已经向前迈进了一大步;但能处理的函数仍然仅限于周期为$2\pi$的函数.</p>
+<p>事实上,对于具有任意周期$2T$的函数,我们只要进行变换$x=\frac{T}{\pi}\hat{x}$ ,就可以很方便的构造出以$\hat{x}$为自变量、以$2\pi$为周期的函数:$g(\hat{x})=f(\frac{T}{\pi}\hat{x})=f(x)$.相应地,复指数傅里叶级数及其系数的生成公式为:</p>
+<p>$$g(\hat{x})=\sum^\infty_{n=-\infty}e_ne^{in\hat{x}},\quad e_n=\frac{1}{2\pi}\int_{-\pi}^\pi g(\hat{x})e^{-in\hat{x}}\mathrm{d}\hat{x}$$</p>
+<p>变换回$f(x)$的结果是:</p>
+<p>$$f(x)=\sum^\infty_{n=-\infty}e_ne^{i\frac{n\pi}{T}x}\\ e_n=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-i\frac{n\pi}{T}x}\mathrm{d}(\frac{\pi}{T}x)=\frac{1}{2T}\int_{-T}^T f(x)e^{-i\frac{n\pi}{T}x}\mathrm{d}x$$</p>
+<p>若令$k=\frac{n\pi}{T}$,我们可以得到另一种等价的形式.</p>
+<h6 id="到这里-我们完成了从定长周期到一般周期的推广"><a href="#到这里-我们完成了从定长周期到一般周期的推广" class="headerlink" title="到这里,我们完成了从定长周期到一般周期的推广."></a><strong>到这里,我们完成了从定长周期到一般周期的推广.</strong></h6><p>从针对周期函数的傅里叶级数到针对任意函数的傅里叶变换,一个常用的想法是设想$T\to\infty$;所幸在我们的充分的前期铺垫下,这一步会是很容易完成的.</p>
+<p>令$T\to\infty$,则$f(x)$就愈发和任意函数接近;随着$T$作为分母愈发增大,$\frac{n\pi}{T}$就愈发稠密、愈发接近一个连续的谱.将前述和式过渡到连续的积分形式,就有:</p>
+<p>$$f(x)=\sum^\infty_{n=-\infty}e_ne^{i\frac{n\pi}{T}x}\to \int_{-\infty}^\infty F(n)e^{i\frac{n\pi}{T}x}\mathrm{d}n\\F(n)=\frac{1}{2T}\int_{T}^T f(x)e^{-i\frac{n\pi}{T}x}\mathrm{d}x\to\frac{1}{2T}\int_{-\infty}^\infty f(x)e^{-i\frac{n\pi}{T}x}\mathrm{d}x$$</p>
+<p>式中$F(n)\in\mathbb{C}$是$e_n$连续化的结果;其自变量$n$与$e_n$的下标是一致的,函数的意义是在”$n$空间”中的”模式密度”.</p>
+<p>实际情况中,我们常常再进行一次变换,以图在变量更为简介的$k$下进行傅里叶变换:</p>
+<p>$$f(x)\to\int_{-\infty}^\infty F(k)e^{ikx}\mathrm{d}k$$</p>
+<p>这对$F(k),F(n)$间提出了约束关系(注意,这说明了为什么二者会差一个系数):$F(n)\mathrm{d}n=F(k)\mathrm{d}k$</p>
+<p>考虑到$k=\frac{\pi}{T}x\Leftrightarrow \mathrm{d}k=\frac{\pi}{T}\mathrm{d}n$,带入上式我们就有$F(k)=F(n)\frac{\mathrm{d}n}{\mathrm{d}k}=F(n)\frac T\pi$,再带回傅里叶展开式就有:</p>
+<p>$$F(k)=\frac T\pi F(n)=\frac1{2\pi}\int_{-\infty}^\infty f(x)e^{-ikx}\mathrm{d}k\\f(x)=\int_{-\infty}^\infty F(k)e^{ikx}\mathrm{d}k$$</p>
+<h4 id="OHHHHHHHHHHHHHHHHHHHHH"><a href="#OHHHHHHHHHHHHHHHHHHHHH" class="headerlink" title="-OHHHHHHHHHHHHHHHHHHHHH!"></a>-OHHHHHHHHHHHHHHHHHHHHH!</h4><p>至此,我们已经完整地推出了/过渡到了傅里叶变换的公式.值得注意的几点包括:</p>
+<ul>
+<li><p>这里的波数$k=\frac{n\pi}T$作为数学定义出现,但仍然是与物理定义一致的</p>
+</li>
+<li><p>随着$T$趋于无穷,作为波数的$k=\frac{n\pi}{T}$的取值点也愈发稠密;只要考虑$F(k)$是连续函数,我们总可以在那些无理点和没有取值的有理点补充定义,将值补充定义为附近的有取值的$\frac{n\pi}{T}$点,获得一个完整的连续函数.这样一来,说明$F(k)$”定义是合理的”.</p>
+</li>
+<li><p>通过这样推导得出的傅里叶变换,我们自然而然地解决了正向变换中那个奇怪的负号问题($e^{-ikx}$)——它来自于复函数空间上的酉内积.</p>
+</li>
+<li><p>此外,经有这一推导,我们还自然地得出了傅里叶逆变换的公式.它与正向变换的公式差了一个负号.(表面看上去是这样.)</p>
+</li>
+</ul>
+<p>一些书中为了对称性(说的就是你,《数学物理方法》),会采用另一种写法,将正逆傅里叶变换中前面的系数统一写为$1/\sqrt{2\pi}$,但这只是些符号上的trick,其公式的其他部分、以及背后的数学思想,都是一致的.</p>
+<p><strong>总结一下.以上3000字,我们完成了这么几件事:</strong></p>
+<ul>
+<li><p>将三角形式傅里叶级数拓展为复指数形式傅里叶级数</p>
+<ul>
+<li>从实到复的拓展$\mathbb{R}\to\mathbb{C}$</li>
+<li>求和指标从自然数向整数的拓展$n\in\mathbb{N}\to\mathbb{Z}$</li>
+</ul>
+</li>
+<li><p>将固定周期函数的傅里叶级数拓展为任意周期函数的傅里叶级数</p>
+<ul>
+<li>$(-\pi,\pi)\to(-T,T)$</li>
+</ul>
+</li>
+<li><p>将离散的傅里叶级数拓展为连续的傅里叶变换(及其逆变换)</p>
+<ul>
+<li>从属于离散整数集的求和指标,拓展为属于连续的实数集的积分变量:$n\in \mathbb{Z}\to k\in \mathbb{R}$</li>
+<li>通过极限过程$T\to+\infty$完成</li>
+<li>因而,这一步拓展中包含了许多不严谨的部分;为$f,F$预设了许多美好的前提.详细严谨的分析还是请参考数学分析.</li>
+</ul>
+</li>
+</ul>
+<p>以下都是挖坑内容…不知道什么时候能填完</p>
+<h2 id="常用的傅里叶变换结果-小结论系列"><a href="#常用的傅里叶变换结果-小结论系列" class="headerlink" title="常用的傅里叶变换结果(小结论系列)"></a>常用的傅里叶变换结果(小结论系列)</h2><h2 id="傅里叶级数敛散性的分析-Dirichlet-定理"><a href="#傅里叶级数敛散性的分析-Dirichlet-定理" class="headerlink" title="傅里叶级数敛散性的分析,Dirichlet 定理"></a>傅里叶级数敛散性的分析,Dirichlet 定理</h2><p>大一上刘旭峰的高数课讲到傅里叶级数那一章时,旭峰上来不讲实用的结论却讲起了一大堆歪歪扭扭的定理;当时的我没有认出其中的几个trick,然后就跟不上,然后就弃疗了,…导致我后来的傅里叶学得一直不好(没有信心是更关键的).直到昨天(2020-12-14),搞了本伍胜健的《数学分析II》仔细研究傅里叶级数一章,回头再翻开旭峰高数的笔记一看,才发现歪歪扭扭地每个定理上都写着”数学分析”几个字.</p>
+<p>近日也有能力了(看了数学分析并且看懂了;数学储备也足够了),打算做个笔记把这个历史遗留问题解决掉.(挖坑)</p>
+<h2 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h2><p>emm下次再说</p>
+<h2 id="离散傅里叶-DFT-与快速傅里叶变换-FFT"><a href="#离散傅里叶-DFT-与快速傅里叶变换-FFT" class="headerlink" title="离散傅里叶(DFT)与快速傅里叶变换(FFT)"></a>离散傅里叶(DFT)与快速傅里叶变换(FFT)</h2><p>下次再说，<a href="https://spiritedawaycn.github.io/2020/11/28/Fourier-Transform/">此处</a>有它们间直观关系推导。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>【终结】一份傅里叶笔记</p><p><a href="http://spiritedawaycn.github.io/2020/12/14/Notes-of-Fourier-Transform/">http://spiritedawaycn.github.io/2020/12/14/Notes-of-Fourier-Transform/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>SpiritedAwayCN</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-12-14</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-12-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80/">数理基础</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5fb48effefe98e0012650837&amp;product=inline-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/12/14/physical-address/"><span class="level-item">输出虚拟地址对应物理地址的程序</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.jpg" alt="石淳安"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">石淳安</p><p class="is-size-6 is-block">SpiritedAwayCN</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">8</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">7</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/SpiritedAwayCN" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/SpiritedAwayCN"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.facebook.com/profile.php?id=100033199519420"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/SpiritedAwayCN"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Zhihu" href="https://www.zhihu.com/people/spiritedaway-91"><i class="fab fa-quora"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Telegram" href="https://t.me/SpiritedAwayCN"><i class="fab fa-telegram"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://space.bilibili.com/267098354" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bilibili</span></span><span class="level-right"><span class="level-item tag">space.bilibili.com</span></span></a></li><li><a class="level is-mobile" href="https://music.163.com/#/user/home?id=1348689482" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Netease-Cloud-Music</span></span><span class="level-right"><span class="level-item tag">music.163.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Ideas/"><span class="level-start"><span class="level-item">Ideas</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Minecraft/"><span class="level-start"><span class="level-item">Minecraft</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-12-14T11:43:59.000Z">2020-12-14</time></p><p class="title"><a href="/2020/12/14/Notes-of-Fourier-Transform/">【终结】一份傅里叶笔记</a></p><p class="categories"><a href="/categories/Ideas/">Ideas</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-12-14T05:41:44.000Z">2020-12-14</time></p><p class="title"><a href="/2020/12/14/physical-address/">输出虚拟地址对应物理地址的程序</a></p><p class="categories"><a href="/categories/Ideas/">Ideas</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-11-28T09:35:03.000Z">2020-11-28</time></p><p class="title"><a href="/2020/11/28/Fourier-Transform/">DFS, DTFT与DFT</a></p><p class="categories"><a href="/categories/Ideas/">Ideas</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-11-24T15:44:11.000Z">2020-11-24</time></p><p class="title"><a href="/2020/11/24/Recusive-Theorem/">递归定理——输出自身源代码的程序</a></p><p class="categories"><a href="/categories/Ideas/">Ideas</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-11-23T00:57:04.000Z">2020-11-23</time></p><p class="title"><a href="/2020/11/23/Minecraft-EndPoem/">Minecraft终末之诗</a></p><p class="categories"><a href="/categories/Minecraft/">Minecraft</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/11/"><span class="level-start"><span class="level-item">十一月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AstroMC/"><span class="tag">AstroMC</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NPC/"><span class="tag">NPC</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCS/"><span class="tag">TCS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E7%A0%81/"><span class="tag">代码</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80/"><span class="tag">数理基础</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%97/"><span class="tag">诗</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%AD%94%E5%A1%94/"><span class="tag">魔塔</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="SpiritedAwayCN&#039;s Homepage" height="28"></a><p class="is-size-7"><span>&copy; 2020 SpiritedAwayCN</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
